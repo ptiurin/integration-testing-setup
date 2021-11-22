@@ -1,0 +1,37 @@
+name: Setup Firebolt database and engine
+description: >-
+ Setup Firebolt database with the generated name. Then, setup an engine with the same
+ name, which is attached to the created database
+inputs:
+  firebolt-username:
+    description: Firebolt account username
+    required: true
+  firebolt-password:
+    description: Firebolt account password
+    required: true
+  api-endpoint:
+    description: Firebolt api address
+    default: 'api.app.firebolt.io'
+    required: false
+  region:
+    description: In which region to create the database
+    default: 'us-east-1'
+    required: false
+outputs:
+  database_name:
+    description: Name of created database
+  engine_name:
+    description: Name of created engine
+  engine_url:
+    description: Endpoint of created engine
+        
+runs:
+  using: docker
+  image: Dockerfile
+  env:
+    FIREBOLT_USER: ${{ inputs.firebolt-username }}
+    FIREBOLT_PASSWORD: ${{ inputs.firebolt-password }}
+    FIREBOLT_SERVER: ${{ inputs.api-endpoint}}
+    FIREBOLT_DEFAULT_REGION: ${{ inputs.region}}
+  entrypoint: setup.sh
+  post-entrypoint: cleanup.sh
