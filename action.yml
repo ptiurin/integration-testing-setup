@@ -33,5 +33,5 @@ runs:
     FIREBOLT_PASSWORD: ${{ inputs.firebolt-password }}
     FIREBOLT_SERVER: ${{ inputs.api-endpoint}}
     FIREBOLT_DEFAULT_REGION: ${{ inputs.region}}
-  entrypoint: setup.sh
-  post-entrypoint: cleanup.sh
+  entrypoint: ./setup.sh
+  post-entrypoint: ./cleanup.sh
