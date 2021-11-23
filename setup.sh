@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 db_name=$(python3 /scripts/start_database.py)
 name_and_url=$(python3 /scripts/start_engine.py $db_name)
 arr=($name_and_url)
