@@ -1,7 +1,7 @@
 #!/bin/bash
 
 db_name=$(python3 scripts/start_database.py)
-name_and_url=$(python3 scripts/start_engine.py)
+name_and_url=$(python3 scripts/start_engine.py $db_name)
 arr=($name_and_url)
 engine_name="${arr[0]}"
 engine_url="${arr[1]}"

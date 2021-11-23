@@ -1,4 +1,2 @@
 #!/bin/bash
-
-DATABASE=$STATE_database_name
-python scripts/stop_all.py
+python3 scripts/stop_all.py $STATE_database_name

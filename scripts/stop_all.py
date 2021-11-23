@@ -1,4 +1,4 @@
-from os import environ
+from sys import argv
 from time import sleep
 
 from firebolt.common.settings import Settings
@@ -31,9 +31,9 @@ def engine_wait_delete(engine: Engine, rm: ResourceManager) -> None:
 if __name__ == "__main__":
     rm = ResourceManager(Settings())
 
-    if "DATABASE" not in environ:
-        raise RuntimeError("DATABASE environment variable should be defined")
-    database_name = environ.get("DATABASE")
+    if len(argv) < 2:
+        raise RuntimeError("database name argument  should be provided")
+    database_name = argv[1]
     engine_name = database_name
     engine = rm.engines.get_by_name(engine_name)
     engine_wait_stop(engine)
