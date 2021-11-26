@@ -1,5 +1,7 @@
-name: GitHub Actions Demo
-on:
+name: PR validation
+on:  
+  push:
+    branches: [ master ]
   pull_request:
     types:
       - opened
@@ -7,15 +9,12 @@ on:
       - edited
       - synchronize
 jobs:
-  Explore-GitHub-Actions:
+  PR-validation:
     runs-on: ubuntu-latest
     steps:
-      - name: conventional-pr-title
-        uses: aslafy-z/conventional-pr-title-action@v2.2.0
+      - name: Convetional Commits Pull Request
+        uses: jef/conventional-commits-pr-action@v1.0.0
+        if: github.event_name == 'pull_request'
         with:
-          success-state: Title follows the specification.
-          failure-state: Title does not follow the specification.
-          context-name: conventional-pr-title
-          preset: conventional-changelog-angular@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
